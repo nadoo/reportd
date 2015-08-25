@@ -36,6 +36,6 @@ An easy report server for generate html tables from database.
 
 ## Usage
 1. run the program:
-	nohup ./reportd &
+> nohup ./reportd &
 
-2. open in the browser: http://127.0.0.1:80
+2. open in the browser: http://127.0.0.1:8080
