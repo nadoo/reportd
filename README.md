@@ -14,7 +14,6 @@ An easy report server for generate html tables from database.
 
 ## Config
 
-```toml
 	# Listen Address: "ip:port" OR ":port"(listen on all interfaces)
 	Listen = ":8080"
 
@@ -32,7 +31,6 @@ An easy report server for generate html tables from database.
 	[[Reports]]
 	Title = "Report 2"
 	Sql = "SELECT s.song_id, s.song_name, s.song_artist_only FROM m_song s LIMIT 5;"
-```
 
 ## Usage
 1. run the program:
