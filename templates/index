@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>{{ .PageTitle }}</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+    body{font-weight:bold; font-size:9pt; color:#8E8E8E;}
+    table{background-color:#F1FAFA; font-size:9pt; color:#000000;border-collapse:collapse;}
+    th{width:80px; border:1px solid #BEBEBE; text-align: center;}
+    td{border:1px solid #BEBEBE; text-align: center;}
+    tr.tr0{background-color:#F1FAFA;}
+    tr.tr1{background-color:#F1FCFC;}
+    hr{height:1px; width:600px; margin-left:0; text-align:left; border:none; border-top:1px dashed #BEBEBE;}
+    div#fixedNav{position:fixed; top:120px; right:40px; line-height:20px; background: #F1FAFA; border:1px dashed #BEBEBE; text-align: left; padding-right: 20px;}
+    a{color: #8E8E8E; text-decoration:none;}
+</style>
+</head>
+<body>
+Report Time: xxxxx<br /><br />
+
+{{ range .Results}}
+	<a name="{{.Title}}">{{.Title}}</a>
+	<table>
+		<tr>{{ range .Columns}}<th><b>{{.}}</b></th>{{end}}</tr>
+		{{ range .Rows}}
+		<tr>{{range .}}<td>{{.}}</td>{{end}}</tr>
+		{{end}}
+	</table>
+	<br />
+{{end}}
+
+<div id="fixedNav">
+   <ul>
+   {{ range .Results}}
+       <li><a href="#{{.Title}}">{{.Title}}</li>
+   {{end}}
+   </ul>
+</div>
+
+</body>
+</html>
