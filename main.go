@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"reflect"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
@@ -44,7 +45,7 @@ type (
 
 func (self *Reportd) getIndex(c *gin.Context) {
 	db := self.db
-	data := gin.H{"PageTitle": "Report"}
+	data := gin.H{"PageTitle": "Report", "ReportTime": time.Now().Format("2006-01-02 15:04:05")}
 
 	var results = []Result{}
 	for _, v := range conf.Reports {

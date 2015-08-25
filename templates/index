@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-Report Time: <br /><br />
+Report Time: {{ .ReportTime }}<br /><br />
 
 {{ range .Results}}
 	<a name="{{.Title}}">{{.Title}}</a>
