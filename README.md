@@ -26,7 +26,12 @@ An easy report server for generate html tables from database.
 
 	[[Reports]]
 	Title = "Report 1"
-	Sql = "SELECT s.song_id AS SongID, s.song_name FROM m_song s LIMIT 1;"
+	Sql = """SELECT
+			s.song_id AS SongID
+			,s.song_name
+		FROM m_song s
+		LIMIT 1;
+	"""
 
 	[[Reports]]
 	Title = "Report 2"
