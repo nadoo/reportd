@@ -10,7 +10,12 @@ DBConn = "user:password@tcp(127.0.0.1:3306)/database?charset=utf8&autocommit=tru
 
 [[Reports]]
 Title = "Report 1"
-Sql = "SELECT s.song_id AS SongID, s.song_name FROM m_song s LIMIT 1;"
+Sql = """SELECT
+		s.song_id AS SongID
+		,s.song_name
+	FROM m_song s
+	LIMIT 1;
+"""
 
 [[Reports]]
 Title = "Report 2"

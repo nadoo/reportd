@@ -33,7 +33,7 @@ An easy report server for generate html tables from database.
 	Sql = "SELECT s.song_id, s.song_name, s.song_artist_only FROM m_song s LIMIT 5;"
 
 ## Usage
-1. run the program:
+1. Run the program:
 > nohup ./reportd &
 
-2. open in the browser: http://127.0.0.1:8080
+2. View in the browser: http://127.0.0.1:8080
