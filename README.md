@@ -58,12 +58,12 @@ An easy report server for generate html tables from database.
 1. Run the program:
 > nohup ./reportd &
 
-2. View in the browser: 
-	- html output
+2. View in the browser:
+	- html output:
 		> http://127.0.0.1:8080
-	- html output with query parameters
+	- html output with query parameters:
 		> http://127.0.0.1:8080?artists=she&artists=her
-	- json output
+	- json output:
 		> http://127.0.0.1:8080/json
-	- json output with query parameters
+	- json output with query parameters:
 		> http://127.0.0.1:8080/json?artists=she&artists=her
