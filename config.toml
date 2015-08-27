@@ -19,4 +19,20 @@ Sql = """SELECT
 
 [[Reports]]
 Title = "Report 2"
-Sql = "SELECT s.song_id, s.song_name, s.song_artist_only FROM m_song s LIMIT 5;"
+Params = true
+Sql = """SELECT
+			s.song_id,
+			s.song_name
+		FROM m_song s
+		WHERE s.song_artist_only IN (:artists);
+"""
+
+#[[Reports]]
+#Title = "Report 3"
+#Params = true
+#Sql = """SELECT
+#			s.song_id,
+#			s.song_name
+#		FROM m_song s
+#		WHERE s.song_artist_only = :artist1 OR s.song_artist_only = :artist2;
+#"""

@@ -38,20 +38,43 @@ type (
 	}
 
 	Report struct {
-		Title string
-		Sql   string
+		Title  string
+		Params bool `default:false`
+		Sql    string
 	}
 )
 
-func (self *Reportd) getIndex(c *gin.Context) {
+func (self *Reportd) getIndexData(c *gin.Context) gin.H {
 	db := self.db
 	data := gin.H{"PageTitle": "Report", "ReportTime": time.Now().Format("2006-01-02 15:04:05")}
 
+	var args []interface{}                    // sql query args
+	var params = make(map[string]interface{}) // url parameters
+
+	for k, v := range c.Request.URL.Query() {
+		params[k] = v
+	}
+
 	var results = []Result{}
 	for _, v := range conf.Reports {
-		rows, err := db.Queryx(v.Sql)
+		sqlStr := v.Sql
+		var err error
+
+		if v.Params {
+			sqlStr, args, err = sqlx.Named(v.Sql, params)
+			if err != nil {
+				log.Println(err)
+			}
+			sqlStr, args, err = sqlx.In(sqlStr, args...)
+			if err != nil {
+				log.Println(err)
+			}
+			sqlStr = db.Rebind(sqlStr)
+		}
+
+		rows, err := db.Queryx(sqlStr, args...)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 		defer rows.Close()
 
@@ -81,7 +104,17 @@ func (self *Reportd) getIndex(c *gin.Context) {
 	}
 
 	data["Results"] = results
+	return data
+}
+
+func (self *Reportd) getIndex(c *gin.Context) {
+	data := self.getIndexData(c)
 	c.HTML(http.StatusOK, "index", data)
+}
+
+func (self *Reportd) getIndexJson(c *gin.Context) {
+	data := self.getIndexData(c)
+	c.JSON(http.StatusOK, data)
 }
 
 func main() {
@@ -105,5 +138,6 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/", reportd.getIndex)
+	router.GET("/json", reportd.getIndexJson)
 	router.Run(conf.Listen)
 }

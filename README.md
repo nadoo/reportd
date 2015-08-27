@@ -35,10 +35,35 @@ An easy report server for generate html tables from database.
 
 	[[Reports]]
 	Title = "Report 2"
-	Sql = "SELECT s.song_id, s.song_name, s.song_artist_only FROM m_song s LIMIT 5;"
+	Params = true
+	Sql = """SELECT
+				s.song_id,
+				s.song_name
+			FROM m_song s
+			WHERE s.song_artist_only IN (:artists);
+	"""
+
+	#[[Reports]]
+	#Title = "Report 3"
+	#Params = true
+	#Sql = """SELECT
+	#			s.song_id,
+	#			s.song_name
+	#		FROM m_song s
+	#		WHERE s.song_artist_only = :artist1 OR s.song_artist_only = :artist2;
+	#"""
+
 
 ## Usage
 1. Run the program:
 > nohup ./reportd &
 
-2. View in the browser: http://127.0.0.1:8080
+2. View in the browser: 
+	- html output
+		> http://127.0.0.1:8080
+	- html output with query parameters
+		> http://127.0.0.1:8080?artists=she&artists=her
+	- json output
+		> http://127.0.0.1:8080/json
+	- json output with query parameters
+		> http://127.0.0.1:8080/json?artists=she&artists=her
