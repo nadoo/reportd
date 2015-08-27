@@ -1,7 +1,7 @@
 reportd
 =====
 
-An easy report server for generate html tables from database.
+An easy report server for generate html or json from database.
 
 ## Install
 

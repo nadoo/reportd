@@ -3,7 +3,7 @@
 ####reportd v0.2, 2015-08-28
 
 - [NEW] Json output support(for better 3rd party system integration).
-- [NEW] Sql Parameters support.
+- [NEW] Sql parameters support.
 
 ####reportd v0.1, 2015-08-25
 
